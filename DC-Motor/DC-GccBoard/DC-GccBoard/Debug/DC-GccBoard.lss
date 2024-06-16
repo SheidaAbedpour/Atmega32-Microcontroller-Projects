@@ -1,0 +1,216 @@
+
+DC-GccBoard.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000d4  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000148  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00800060  00800060  00000148  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000148  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000178  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000028  00000000  00000000  000001b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000598  00000000  00000000  000001dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000525  00000000  00000000  00000774  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000003fd  00000000  00000000  00000c99  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000044  00000000  00000000  00001098  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00006415  00000000  00000000  000010dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000003c  00000000  00000000  000074f1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000018  00000000  00000000  0000752d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_macro  0000022e  00000000  00000000  00007545  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	29 c0       	rjmp	.+82     	; 0x54 <__ctors_end>
+   2:	00 00       	nop
+   4:	38 c0       	rjmp	.+112    	; 0x76 <__vector_1>
+   6:	00 00       	nop
+   8:	35 c0       	rjmp	.+106    	; 0x74 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	33 c0       	rjmp	.+102    	; 0x74 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	31 c0       	rjmp	.+98     	; 0x74 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	2f c0       	rjmp	.+94     	; 0x74 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	2d c0       	rjmp	.+90     	; 0x74 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	2b c0       	rjmp	.+86     	; 0x74 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	29 c0       	rjmp	.+82     	; 0x74 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	27 c0       	rjmp	.+78     	; 0x74 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	25 c0       	rjmp	.+74     	; 0x74 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	23 c0       	rjmp	.+70     	; 0x74 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	21 c0       	rjmp	.+66     	; 0x74 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	1f c0       	rjmp	.+62     	; 0x74 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	1d c0       	rjmp	.+58     	; 0x74 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	1b c0       	rjmp	.+54     	; 0x74 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	19 c0       	rjmp	.+50     	; 0x74 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	17 c0       	rjmp	.+46     	; 0x74 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	15 c0       	rjmp	.+42     	; 0x74 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	13 c0       	rjmp	.+38     	; 0x74 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	11 c0       	rjmp	.+34     	; 0x74 <__bad_interrupt>
+	...
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a1 36       	cpi	r26, 0x61	; 97
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	13 d0       	rcall	.+38     	; 0x98 <main>
+  72:	2e c0       	rjmp	.+92     	; 0xd0 <_exit>
+
+00000074 <__bad_interrupt>:
+  74:	c5 cf       	rjmp	.-118    	; 0x0 <__vectors>
+
+00000076 <__vector_1>:
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+unsigned char i;
+
+ISR(INT0_vect) {
+  76:	1f 92       	push	r1
+  78:	0f 92       	push	r0
+  7a:	0f b6       	in	r0, 0x3f	; 63
+  7c:	0f 92       	push	r0
+  7e:	11 24       	eor	r1, r1
+  80:	8f 93       	push	r24
+	i = i + 10;
+  82:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+  86:	86 5f       	subi	r24, 0xF6	; 246
+  88:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+}
+  8c:	8f 91       	pop	r24
+  8e:	0f 90       	pop	r0
+  90:	0f be       	out	0x3f, r0	; 63
+  92:	0f 90       	pop	r0
+  94:	1f 90       	pop	r1
+  96:	18 95       	reti
+
+00000098 <main>:
+
+int main(void) {
+	
+	// define portB.0 as input
+	DDRB &= ~(1 << 0);
+  98:	b8 98       	cbi	0x17, 0	; 23
+	PORTB |= (1 << 0);
+  9a:	c0 9a       	sbi	0x18, 0	; 24
+	
+	// define portC as output
+	PORTC = 0xFF;
+  9c:	8f ef       	ldi	r24, 0xFF	; 255
+  9e:	85 bb       	out	0x15, r24	; 21
+	
+	// duty_cycle=25% for non-inverted correct phase
+	i = 64;
+  a0:	80 e4       	ldi	r24, 0x40	; 64
+  a2:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+	OCR0 = i; 
+  a6:	8c bf       	out	0x3c, r24	; 60
+	
+	// correct phase, non-inverted, N=1
+	TCCR0 = 0x61;
+  a8:	91 e6       	ldi	r25, 0x61	; 97
+  aa:	93 bf       	out	0x33, r25	; 51
+	
+	DDRB |= (1 << PB3);
+  ac:	bb 9a       	sbi	0x17, 3	; 23
+	DDRD &= ~(1 << PD2);
+  ae:	8a 98       	cbi	0x11, 2	; 17
+	PORTD |= (1 << PD2);
+  b0:	92 9a       	sbi	0x12, 2	; 18
+	
+	GICR = (1 << INT0);
+  b2:	8b bf       	out	0x3b, r24	; 59
+	
+	MCUCR = 0x02;
+  b4:	82 e0       	ldi	r24, 0x02	; 2
+  b6:	85 bf       	out	0x35, r24	; 53
+	
+	sei();
+  b8:	78 94       	sei
+	
+	while(1){
+		if (sw == 0)
+			PORTC = 0x01;
+		else
+			PORTC = 0x02;
+  ba:	22 e0       	ldi	r18, 0x02	; 2
+	
+	sei();
+	
+	while(1){
+		if (sw == 0)
+			PORTC = 0x01;
+  bc:	91 e0       	ldi	r25, 0x01	; 1
+	MCUCR = 0x02;
+	
+	sei();
+	
+	while(1){
+		if (sw == 0)
+  be:	c0 99       	sbic	0x18, 0	; 24
+  c0:	02 c0       	rjmp	.+4      	; 0xc6 <main+0x2e>
+			PORTC = 0x01;
+  c2:	95 bb       	out	0x15, r25	; 21
+  c4:	01 c0       	rjmp	.+2      	; 0xc8 <main+0x30>
+		else
+			PORTC = 0x02;
+  c6:	25 bb       	out	0x15, r18	; 21
+			
+		OCR0 = i;
+  c8:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+  cc:	8c bf       	out	0x3c, r24	; 60
+		
+	}
+  ce:	f7 cf       	rjmp	.-18     	; 0xbe <main+0x26>
+
+000000d0 <_exit>:
+  d0:	f8 94       	cli
+
+000000d2 <__stop_program>:
+  d2:	ff cf       	rjmp	.-2      	; 0xd2 <__stop_program>
