@@ -10,10 +10,12 @@ src/main.d src/main.o: ../src/main.c \
  d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
+ d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
+ d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
+ d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h
 
 d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -37,10 +39,14 @@ d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h
 
 d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
-
 d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
 d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
+
+d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
+
+d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
+
+d:\new\ folder\ (4)\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
