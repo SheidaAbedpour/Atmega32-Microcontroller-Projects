@@ -1,29 +1,29 @@
 #ifndef F_CPU
-#define F_CPU 16000000UL
+#define F_CPU 8000000UL
 #endif
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
 
-void ADC_init() {
+void ADC_init(void) {
 	DDRA = 0xFE;
 	PORTA = 0x00;
-	ADMUX = 0x60;
-	ADCSRA = 0x84; 
+	ADMUX = 0x40;
+	ADCSRA = 0x86;
 }
 
-uint16_t ADC_read() {
-	ADCSRA |= (1<<ADSC); 
-	while(ADCSRA & (1<<ADIF));
+uint16_t ADC_read(void) {
+	ADCSRA |= (1<<ADSC);
+	while (ADCSRA & (1 << ADIF));
 	ADCSRA |= (1<<ADIF);
 	return ADC;
 }
 
 
-void PWM_init() {
-	DDRB |= (1<<PB3); 
-	TCCR0 = (1<<WGM00) | (1<<WGM01) | (1<<COM01) | (1<<CS01); 
+void PWM_init(void) {
+	DDRB |= (1<<PB3);
+	TCCR0 = 0x63;
 }
 
 void PWM_setDutyCycle(uint8_t duty) {
@@ -53,25 +53,26 @@ void UART_sendString(const char* str) {
 
 
 int main(void) {
-	char buffer[100];
+	char buffer[20];
 	uint16_t adc_value;
 
 	ADC_init();
 	PWM_init();
-	UART_init(9600); 
+	UART_init(9600);
 
-	DDRB |= (1<<PB0) | (1<<PB1); 
+	DDRB |= (1<<PB0) | (1<<PB1);
 	PORTB = 0x01;
 
 	while (1) {
 		adc_value = ADC_read();
 		
-		uint16_t min_duty = 64;
-		uint16_t max_duty = 190;
-		uint16_t pwm_value = ((adc_value / 1023) * (max_duty - min_duty) + min_duty); 
-		PWM_setDutyCycle(pwm_value); 
+		uint16_t min_duty = 8;
+		uint16_t max_duty = 254;
+		uint16_t pwm_value = ((uint32_t)adc_value * (max_duty - min_duty) / 1023) + min_duty;
+
+		PWM_setDutyCycle(pwm_value);
 		
-		snprintf(buffer, sizeof(buffer), "duty:%d, pot:%d | ", pwm_value, adc_value); 
+		snprintf(buffer, sizeof(buffer), "duty:%u, pot:%u\r\n", pwm_value, adc_value);
 		UART_sendString(buffer);
 		
 		_delay_ms(500);
