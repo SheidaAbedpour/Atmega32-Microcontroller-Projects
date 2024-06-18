@@ -264,7 +264,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x130
+.text           0x00000000      0x15e
  *(.vectors)
  .vectors       0x00000000       0x54 D:/New folder (4)/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -348,15 +348,15 @@ END GROUP
                 0x0000007c        0xa src/main.o
                 0x0000007c                ADC_init
  .text.show_time
-                0x00000086       0x94 src/main.o
+                0x00000086       0xba src/main.o
                 0x00000086                show_time
- .text.main     0x0000011a       0x12 src/main.o
-                0x0000011a                main
-                0x0000012c                . = ALIGN (0x2)
+ .text.main     0x00000140       0x1a src/main.o
+                0x00000140                main
+                0x0000015a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000012c        0x0 d:/new folder (4)/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000012c                _exit
-                0x0000012c                exit
+ .fini9         0x0000015a        0x0 d:/new folder (4)/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000015a                _exit
+                0x0000015a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -375,11 +375,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000012c        0x4 d:/new folder (4)/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000015a        0x4 d:/new folder (4)/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000130                _etext = .
+                0x0000015e                _etext = .
 
-.data           0x00800060        0xa load address 0x00000130
+.data           0x00800060        0xa load address 0x0000015e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -398,8 +398,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
-                0x00000130                __data_load_start = LOADADDR (.data)
-                0x0000013a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000015e                __data_load_start = LOADADDR (.data)
+                0x00000168                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080006a        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -478,34 +478,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x714
+.debug_info     0x00000000      0x743
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/New folder (4)/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x22e src/main.o
+ .debug_info    0x000004e6      0x25d src/main.o
 
-.debug_abbrev   0x00000000      0x62d
+.debug_abbrev   0x00000000      0x656
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 D:/New folder (4)/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3      0x18a src/main.o
+ .debug_abbrev  0x000004a3      0x1b3 src/main.o
 
-.debug_line     0x00000000      0x443
+.debug_line     0x00000000      0x44d
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 D:/New folder (4)/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000115      0x32e src/main.o
+ .debug_line    0x00000115      0x338 src/main.o
 
 .debug_frame    0x00000000       0x64
  *(.debug_frame)
  .debug_frame   0x00000000       0x64 src/main.o
 
-.debug_str      0x00000000     0x66d8
+.debug_str      0x00000000     0x66e2
  *(.debug_str)
  .debug_str     0x00000000      0x196 D:/New folder (4)/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196     0x6542 src/main.o
-                               0x663c (size before relaxing)
+ .debug_str     0x00000196     0x654c src/main.o
+                               0x6646 (size before relaxing)
 
-.debug_loc      0x00000000      0x152
+.debug_loc      0x00000000      0x16c
  *(.debug_loc)
- .debug_loc     0x00000000      0x152 src/main.o
+ .debug_loc     0x00000000      0x16c src/main.o
 
 .debug_macinfo
  *(.debug_macinfo)
