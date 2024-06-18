@@ -1,40 +1,56 @@
-/**
- * \file
- *
- * \brief Empty user application template
- *
- */
+#ifndef F_CPU
+#define F_CPU 8000000UL
+#endif
 
-/**
- * \mainpage User Application template doxygen documentation
- *
- * \par Empty user application template
- *
- * Bare minimum empty user application template
- *
- * \par Content
- *
- * -# Include the ASF header files (through asf.h)
- * -# "Insert system clock initialization code here" comment
- * -# Minimal main function that starts with a call to board_init()
- * -# "Insert application code here" comment
- *
- */
+#include <avr/io.h>
+#include <util/delay.h>
+#include <stdio.h>
 
-/*
- * Include header files for all drivers that have been imported from
- * Atmel Software Framework (ASF).
- */
-/*
- * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
- */
-#include <asf.h>
+void ADC_init() {
+	ADCSRA = 0x87;
+	ADMUX = 0x63;
+}
 
-int main (void)
-{
-	/* Insert system clock initialization code here (sysclk_init()). */
+uint16_t ADC_read(void) {
+	ADCSRA |= (1<<ADSC);
+	while (ADCSRA & (1 << ADIF));
+	ADCSRA |= (1<<ADIF);
+	return ADC;
+}
 
-	board_init();
+void show_time(uint8_t sec) {
+	uint8_t nums[] = {0x3F, 0x06, 0xA5, 0x8D, 0x19, 0x49, 0x41, 0x1F, 0x01, 0x09};
+	
+	uint8_t n1 = sec % 10;
+	uint8_t n2 = sec / 10;
+	
+	PORTC = nums[n1];
+	//PORTD = 0xEF;
+	PORTD = 0x01;
+	_delay_ms(500);
+	
+	PORTC = nums[n2];
+	//PORTD = 0xFD;
+	PORTD = 0x02;
+	_delay_ms(500);
+}
 
-	/* Insert application code here, after the board has been initialized. */
+int main (void) {
+	DDRA &= ~(1<<PA3);
+	DDRB &= ~(1<<PB3);
+	
+	ADC_init();
+	
+	DDRC = 0xFF;
+	DDRD = 0x03;
+	
+	uint16_t ADC_value;
+	uint16_t min = 10;
+	uint16_t max = 60;
+	
+	while(1) {
+		//ADC_value = ADC_read();
+		//uint16_t green_time = (((uint32_t)ADC_value * (max - min)) / 1023) + min;
+		show_time(10);
+	}
 }
