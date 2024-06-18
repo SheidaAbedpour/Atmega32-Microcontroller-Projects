@@ -57,7 +57,7 @@
   <documentation help="http://asf.atmel.com/docs/3.40.0/common.applications.user_application.stk600-mega.atmega32/html/index.html" />
   <offline-documentation help="" />
   <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.25.0" />
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.34.1" />
   </dependencies>
   <project id="common.applications.user_application.stk600-mega.atmega32" value="Add" config="" content-id="Atmel.ASF" />
   <board id="board.stk600-mega.atmega32" value="Add" config="" content-id="Atmel.ASF" />

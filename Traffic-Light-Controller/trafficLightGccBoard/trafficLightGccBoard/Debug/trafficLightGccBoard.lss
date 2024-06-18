@@ -3,31 +3,31 @@ trafficLightGccBoard.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000013e  00000000  00000000  00000074  2**1
+  0 .text         00000130  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000000a  00800060  0000013e  000001b2  2**0
+  1 .data         0000000a  00800060  00000130  000001a4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  000001bc  2**0
+  2 .comment      00000030  00000000  00000000  000001ae  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001ec  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001e0  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000038  00000000  00000000  00000228  2**0
+  4 .debug_aranges 00000038  00000000  00000000  0000021c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000713  00000000  00000000  00000260  2**0
+  5 .debug_info   00000714  00000000  00000000  00000254  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000062d  00000000  00000000  00000973  2**0
+  6 .debug_abbrev 0000062d  00000000  00000000  00000968  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000034f  00000000  00000000  00000fa0  2**0
+  7 .debug_line   00000443  00000000  00000000  00000f95  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000064  00000000  00000000  000012f0  2**2
+  8 .debug_frame  00000064  00000000  00000000  000013d8  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00006684  00000000  00000000  00001354  2**0
+  9 .debug_str    000066d8  00000000  00000000  0000143c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000152  00000000  00000000  000079d8  2**0
+ 10 .debug_loc    00000152  00000000  00000000  00007b14  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000028  00000000  00000000  00007b2a  2**0
+ 11 .debug_ranges 00000028  00000000  00000000  00007c66  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  00000436  00000000  00000000  00007b52  2**0
+ 12 .debug_macro  00000436  00000000  00000000  00007c8e  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -88,7 +88,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ee e3       	ldi	r30, 0x3E	; 62
+  66:	e0 e3       	ldi	r30, 0x30	; 48
   68:	f1 e0       	ldi	r31, 0x01	; 1
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -96,8 +96,8 @@ Disassembly of section .text:
   70:	aa 36       	cpi	r26, 0x6A	; 106
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
-  76:	57 d0       	rcall	.+174    	; 0x126 <main>
-  78:	60 c0       	rjmp	.+192    	; 0x13a <_exit>
+  76:	51 d0       	rcall	.+162    	; 0x11a <main>
+  78:	59 c0       	rjmp	.+178    	; 0x12c <_exit>
 
 0000007a <__bad_interrupt>:
   7a:	c2 cf       	rjmp	.-124    	; 0x0 <__vectors>
@@ -128,7 +128,7 @@ void show_time(uint8_t sec) {
   94:	de bf       	out	0x3e, r29	; 62
   96:	0f be       	out	0x3f, r0	; 63
   98:	cd bf       	out	0x3d, r28	; 61
-	uint8_t nums[] = {0x3F, 0x06, 0xA5, 0x8D, 0x19, 0x49, 0x41, 0x1F, 0x01, 0x09};
+	uint8_t nums[] = {0x3F, 0x06, 0xDB, 0xCF, 0xE6, 0xED, 0xFD, 0x07, 0xFF, 0xEF};
   9a:	9a e0       	ldi	r25, 0x0A	; 10
   9c:	e0 e6       	ldi	r30, 0x60	; 96
   9e:	f0 e0       	ldi	r31, 0x00	; 0
@@ -138,7 +138,6 @@ void show_time(uint8_t sec) {
   a6:	0d 92       	st	X+, r0
   a8:	9a 95       	dec	r25
   aa:	e1 f7       	brne	.-8      	; 0xa4 <show_time+0x1e>
-	
 	uint8_t n1 = sec % 10;
 	uint8_t n2 = sec / 10;
 	
@@ -165,9 +164,8 @@ void show_time(uint8_t sec) {
   d2:	f1 1d       	adc	r31, r1
   d4:	80 81       	ld	r24, Z
   d6:	85 bb       	out	0x15, r24	; 21
-	//PORTD = 0xEF;
-	PORTD = 0x01;
-  d8:	81 e0       	ldi	r24, 0x01	; 1
+	PORTD = 0xFE;
+  d8:	8e ef       	ldi	r24, 0xFE	; 254
   da:	82 bb       	out	0x12, r24	; 18
 	#else
 		//round up by default
@@ -175,80 +173,72 @@ void show_time(uint8_t sec) {
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  dc:	2f ef       	ldi	r18, 0xFF	; 255
-  de:	34 e3       	ldi	r19, 0x34	; 52
-  e0:	8c e0       	ldi	r24, 0x0C	; 12
-  e2:	21 50       	subi	r18, 0x01	; 1
-  e4:	30 40       	sbci	r19, 0x00	; 0
-  e6:	80 40       	sbci	r24, 0x00	; 0
-  e8:	e1 f7       	brne	.-8      	; 0xe2 <show_time+0x5c>
-  ea:	00 c0       	rjmp	.+0      	; 0xec <show_time+0x66>
-  ec:	00 00       	nop
-	_delay_ms(500);
+  dc:	ef e1       	ldi	r30, 0x1F	; 31
+  de:	fe e4       	ldi	r31, 0x4E	; 78
+  e0:	31 97       	sbiw	r30, 0x01	; 1
+  e2:	f1 f7       	brne	.-4      	; 0xe0 <show_time+0x5a>
+  e4:	00 c0       	rjmp	.+0      	; 0xe6 <show_time+0x60>
+  e6:	00 00       	nop
+	_delay_ms(5);
 	
 	PORTC = nums[n2];
-  ee:	e1 e0       	ldi	r30, 0x01	; 1
-  f0:	f0 e0       	ldi	r31, 0x00	; 0
-  f2:	ec 0f       	add	r30, r28
-  f4:	fd 1f       	adc	r31, r29
-  f6:	e9 0f       	add	r30, r25
-  f8:	f1 1d       	adc	r31, r1
-  fa:	80 81       	ld	r24, Z
-  fc:	85 bb       	out	0x15, r24	; 21
-	//PORTD = 0xFD;
-	PORTD = 0x02;
-  fe:	82 e0       	ldi	r24, 0x02	; 2
- 100:	82 bb       	out	0x12, r24	; 18
- 102:	9f ef       	ldi	r25, 0xFF	; 255
- 104:	24 e3       	ldi	r18, 0x34	; 52
- 106:	3c e0       	ldi	r19, 0x0C	; 12
- 108:	91 50       	subi	r25, 0x01	; 1
- 10a:	20 40       	sbci	r18, 0x00	; 0
- 10c:	30 40       	sbci	r19, 0x00	; 0
- 10e:	e1 f7       	brne	.-8      	; 0x108 <show_time+0x82>
- 110:	00 c0       	rjmp	.+0      	; 0x112 <show_time+0x8c>
- 112:	00 00       	nop
-	_delay_ms(500);
+  e8:	e1 e0       	ldi	r30, 0x01	; 1
+  ea:	f0 e0       	ldi	r31, 0x00	; 0
+  ec:	ec 0f       	add	r30, r28
+  ee:	fd 1f       	adc	r31, r29
+  f0:	e9 0f       	add	r30, r25
+  f2:	f1 1d       	adc	r31, r1
+  f4:	80 81       	ld	r24, Z
+  f6:	85 bb       	out	0x15, r24	; 21
+	PORTD = 0xFD;
+  f8:	8d ef       	ldi	r24, 0xFD	; 253
+  fa:	82 bb       	out	0x12, r24	; 18
+  fc:	8f e1       	ldi	r24, 0x1F	; 31
+  fe:	9e e4       	ldi	r25, 0x4E	; 78
+ 100:	01 97       	sbiw	r24, 0x01	; 1
+ 102:	f1 f7       	brne	.-4      	; 0x100 <show_time+0x7a>
+ 104:	00 c0       	rjmp	.+0      	; 0x106 <show_time+0x80>
+ 106:	00 00       	nop
+	_delay_ms(5);	
 }
- 114:	2a 96       	adiw	r28, 0x0a	; 10
- 116:	0f b6       	in	r0, 0x3f	; 63
- 118:	f8 94       	cli
- 11a:	de bf       	out	0x3e, r29	; 62
- 11c:	0f be       	out	0x3f, r0	; 63
- 11e:	cd bf       	out	0x3d, r28	; 61
- 120:	df 91       	pop	r29
- 122:	cf 91       	pop	r28
- 124:	08 95       	ret
+ 108:	2a 96       	adiw	r28, 0x0a	; 10
+ 10a:	0f b6       	in	r0, 0x3f	; 63
+ 10c:	f8 94       	cli
+ 10e:	de bf       	out	0x3e, r29	; 62
+ 110:	0f be       	out	0x3f, r0	; 63
+ 112:	cd bf       	out	0x3d, r28	; 61
+ 114:	df 91       	pop	r29
+ 116:	cf 91       	pop	r28
+ 118:	08 95       	ret
 
-00000126 <main>:
+0000011a <main>:
 
 int main (void) {
 	DDRA &= ~(1<<PA3);
- 126:	d3 98       	cbi	0x1a, 3	; 26
+ 11a:	d3 98       	cbi	0x1a, 3	; 26
 	DDRB &= ~(1<<PB3);
+ 11c:	bb 98       	cbi	0x17, 3	; 23
 	
 	ADC_init();
- 128:	bb 98       	cbi	0x17, 3	; 23
+ 11e:	ae df       	rcall	.-164    	; 0x7c <ADC_init>
 	
 	DDRC = 0xFF;
- 12a:	a8 df       	rcall	.-176    	; 0x7c <ADC_init>
- 12c:	8f ef       	ldi	r24, 0xFF	; 255
-	DDRD = 0x03;
- 12e:	84 bb       	out	0x14, r24	; 20
+ 120:	8f ef       	ldi	r24, 0xFF	; 255
+ 122:	84 bb       	out	0x14, r24	; 20
+	DDRD = 0xFF;
+ 124:	81 bb       	out	0x11, r24	; 17
 	uint16_t max = 60;
-	
+		
 	while(1) {
 		//ADC_value = ADC_read();
 		//uint16_t green_time = (((uint32_t)ADC_value * (max - min)) / 1023) + min;
-		show_time(10);
- 130:	83 e0       	ldi	r24, 0x03	; 3
- 132:	81 bb       	out	0x11, r24	; 17
- 134:	8a e0       	ldi	r24, 0x0A	; 10
- 136:	a7 df       	rcall	.-178    	; 0x86 <show_time>
- 138:	fd cf       	rjmp	.-6      	; 0x134 <main+0xe>
+		show_time(90);
+ 126:	8a e5       	ldi	r24, 0x5A	; 90
+ 128:	ae df       	rcall	.-164    	; 0x86 <show_time>
+ 12a:	fd cf       	rjmp	.-6      	; 0x126 <main+0xc>
 
-0000013a <_exit>:
- 13a:	f8 94       	cli
+0000012c <_exit>:
+ 12c:	f8 94       	cli
 
-0000013c <__stop_program>:
- 13c:	ff cf       	rjmp	.-2      	; 0x13c <__stop_program>
+0000012e <__stop_program>:
+ 12e:	ff cf       	rjmp	.-2      	; 0x12e <__stop_program>
