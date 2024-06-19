@@ -1,7 +1,7 @@
 # Traffic Light Controller 
 This project implements a traffic light control system using an AVR microcontroller. The system controls two sets of traffic lights (main and sub) and adjusts the light durations based on ADC inputs.
 
-![](Traffic-Light-Controller/proteus/schematic.PNG)
+![Proteus Simulation Setup](https://github.com/SheidaAbedpour/Atmega32/blob/main/Traffic-Light-Controller/proteus/schematic.PNG)
 
 ## Overview
 - ***`ADC (Analog-to-Digital Converter)`***: Reads analog signals to adjust the timing of the green and yellow lights dynamically.
