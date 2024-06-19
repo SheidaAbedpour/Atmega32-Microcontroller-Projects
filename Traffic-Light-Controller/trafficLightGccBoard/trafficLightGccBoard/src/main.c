@@ -8,19 +8,20 @@
 
 uint8_t sec_main;
 uint8_t sec_sub;
-uint8_t green_time = 6;
-uint8_t yellow_time = 2;
-uint8_t red_time = 3;
+uint8_t green_time;
+uint8_t yellow_time;
+uint8_t red_time;
 enum State {GREEN, YELLOW, RED};
 uint8_t light_state_main = GREEN;
 uint8_t light_state_sub = RED;
 
 void ADC_init() {
-	ADCSRA = 0x86;
-	ADMUX = 0x63;
+	ADCSRA = 0x87;
+	ADMUX = 0x46;
 }
 
-uint16_t ADC_read(void) {
+uint16_t ADC_read(uint8_t channel) {
+	ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
 	ADCSRA |= (1<<ADSC);
 	while (ADCSRA & (1 << ADIF));
 	ADCSRA |= (1<<ADIF);
@@ -127,6 +128,7 @@ void init_timer1() {
 }
 
 ISR(TIMER1_COMPA_vect) {
+	
 	if (sec_main > 0) {
 		sec_main--;
 	}
@@ -136,13 +138,15 @@ ISR(TIMER1_COMPA_vect) {
 		sec_sub--;
 	}
 	update_traffic_lights_sub();
-
+	
 	set_traffic_lights();
 }
 
 int main (void) {
 	
 	DDRA = 0x3F;
+	PORTA &= ~((1 << PA6) | (1 << PA7));
+	
 	DDRB &= ~(1<<PB3);
 	DDRC = 0xFF;
 	DDRD = 0xFF;
@@ -154,8 +158,26 @@ int main (void) {
 	sec_sub = red_time;
 	set_traffic_lights();
 	
+	uint16_t adc_green, adc_yellow;
+	
+	uint16_t max_green = 60;
+	uint16_t min_green = 40;
+	uint16_t max_yellow = 2;
+	uint16_t min_yellow = 1;
+	
+	char buffer[100];
+	
 	while(1) {
 		
+		adc_green = ADC_read(6);
+		adc_yellow = ADC_read(7);
+		
+		green_time = ((uint32_t)(adc_green) * (max_green - min_green)) / 1023.0 + min_green;	
+		yellow_time = ((uint32_t)(adc_yellow) * (max_yellow - min_yellow)) / 1023.0 + min_yellow;
+		red_time = 0.75 * green_time;
+				
+		show_time(sec_main, 0);
+		show_time(sec_sub, 2);
 	}
 	
 	return 0;
