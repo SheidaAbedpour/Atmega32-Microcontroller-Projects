@@ -95,7 +95,7 @@ OCR1A = 15624
 
 
 
-### Usage of Project
+## Usage of Project
 
 This project controls two sets of traffic lights and adjusts their timing based on analog inputs.
 
