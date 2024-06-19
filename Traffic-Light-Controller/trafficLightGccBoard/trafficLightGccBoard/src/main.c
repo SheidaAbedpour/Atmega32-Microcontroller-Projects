@@ -1,19 +1,22 @@
 #ifndef F_CPU
-#define F_CPU 1000000UL
+#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+
 uint8_t sec_main;
 uint8_t sec_sub;
 uint8_t green_time;
 uint8_t yellow_time;
 uint8_t red_time;
+
 enum State {GREEN, YELLOW, RED};
 uint8_t light_state_main = GREEN;
 uint8_t light_state_sub = RED;
+
 
 void ADC_init() {
 	ADCSRA = 0x87;
@@ -28,6 +31,7 @@ uint16_t ADC_read(uint8_t channel) {
 	return ADC;
 }
 
+
 void show_time(uint8_t sec, uint8_t seg_index) {
 	uint8_t nums[] = {
 		0x3F, 0x06, 0xDB, 0xCF, 0xE6,
@@ -39,12 +43,13 @@ void show_time(uint8_t sec, uint8_t seg_index) {
 	
 	PORTC = nums[n1];
 	PORTD = ~(1<<seg_index);
-	_delay_ms(1000);
+	_delay_ms(10);
 	
 	PORTC = nums[n2];
 	PORTD = ~(1<<(seg_index+1));
-	_delay_ms(1000);
+	_delay_ms(10);
 }
+
 
 void set_traffic_lights() {
 	switch (light_state_main) {
@@ -118,6 +123,7 @@ void update_traffic_lights_sub() {
 	}
 }
 
+
 void init_timer1() {
 	TCNT1 = 0;
 	OCR1A = 15624;
@@ -142,6 +148,8 @@ ISR(TIMER1_COMPA_vect) {
 	set_traffic_lights();
 }
 
+
+
 int main (void) {
 	
 	DDRA = 0x3F;
@@ -158,14 +166,17 @@ int main (void) {
 	sec_sub = red_time;
 	set_traffic_lights();
 	
+	green_time = 60;  
+	yellow_time = 2; 
+	red_time = 45;
+	
 	uint16_t adc_green, adc_yellow;
 	
 	uint16_t max_green = 60;
-	uint16_t min_green = 40;
+	uint16_t min_green = 30;
 	uint16_t max_yellow = 2;
 	uint16_t min_yellow = 1;
 	
-	char buffer[100];
 	
 	while(1) {
 		
@@ -175,7 +186,7 @@ int main (void) {
 		green_time = ((uint32_t)(adc_green) * (max_green - min_green)) / 1023.0 + min_green;	
 		yellow_time = ((uint32_t)(adc_yellow) * (max_yellow - min_yellow)) / 1023.0 + min_yellow;
 		red_time = 0.75 * green_time;
-				
+		
 		show_time(sec_main, 0);
 		show_time(sec_sub, 2);
 	}
