@@ -35,7 +35,7 @@ The ADC initialization involves setting the ADCSRA and ADMUX registers.
 
 | Bit  | 7 (REFS1) | 6 (REFS0) | 5 (ADLAR) | 4 (MUX4) | 3 (MUX3) | 2 (MUX2) | 1 (MUX1) | 0 (MUX0) |
 |------|-----------|-----------|-----------|----------|----------|----------|----------|-----------|
-| Value| 1         | 0         | 0         | 0        | 0        | 1        | 1        | 1         |
+| Value| 0         | 1         | 1         | 0        | 0        | 1        | 1        | 0         |
 
 ```c
 ADCSRA = 0x87;
