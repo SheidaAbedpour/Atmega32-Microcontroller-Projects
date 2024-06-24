@@ -7,8 +7,8 @@ This project demonstrates how to control the speed of a DC motor using an ATmega
 The project uses the following peripherals:
 
 - ***`ADC`***: To read the potentiometer value.
-- ***`PWM`: To control the speed of the DC motor.
-- ***`UART`: To transmit the motor speed and ADC value for monitoring.
+- ***`PWM`***: To control the speed of the DC motor.
+- ***`UART`***: To transmit the motor speed and ADC value for monitoring.
 
 ## Register Settings 
 This project uses various registers to configure the ADC, PWM, and UART functionalities of the AVR microcontroller (ATmega32). Below is an explanation of the key register settings used in this project.
